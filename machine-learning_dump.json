@@ -1,0 +1,359 @@
+{
+  "items": [
+    {
+      "tags": [
+        "python",
+        "machine-learning",
+        "knn"
+      ],
+      "comment_count": 1,
+      "question_id": 67071246,
+      "title": "How can I convert columns of string in dataset to int?",
+      "body": "<p>Some of the data in the dataset are in string format and I should map all of them to the numeric form. I want to convert string data in some columns in the dataset to int int to become usable in the knn method. I wrote this code but It has this error. How can I fix it?\nthank you for your consideration.</p>\n<p>here is the dataset:\n<a href=\"http://gitlab.rahnemacollege.com/rahnemacollege/tuning-registration-JusticeInWork/raw/master/dataset.csv\" rel=\"nofollow noreferrer\">http://gitlab.rahnemacollege.com/rahnemacollege/tuning-registration-JusticeInWork/raw/master/dataset.csv</a></p>\n<p>the error is:</p>\n<pre><code>TypeError                                 Traceback (most recent call last)\n&lt;ipython-input-7-f5bce11c577a&gt; in &lt;module&gt;()\n     30    df.iloc[i,10]=string_to_int(df.iloc[i,10])\n     31    df.iloc[i,11]=string_to_int(df.iloc[i,11])\n---&gt; 32    df.iloc[i,12]=string_to_int(df.iloc[i,12])\n 33 \n 34 \n\n&lt;ipython-input-7-f5bce11c577a&gt; in string_to_int(s)\n 20 def string_to_int(s):\n 21    ord3 = lambda x : '%.3d' % ord(x)\n ---&gt; 22    return int(''.join(map(ord3, s)))\n    23 \n    24 for i in range(1, 24857):\n\nTypeError: 'float' object is not iterable\n</code></pre>\n<p>the code is here:</p>\n<pre><code>import pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom google.colab import files\n!pip install sklearn\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.neighbors import KNeighborsClassifier\nfrom sklearn.metrics import classification_report, confusion_matrix\n#-----------------read file-------------------\nuploaded = files.upload()\nwith open('dataset.csv', 'r') as data:\n   df3 = pd.read_csv(data , encoding = ('ansi'))\n   lst = ['id', 'Prold', 'ProCreationId', 'CustCreatonRate', 'TaskCreationTimestamp',     'Price', 'ServiceId', 'CategoryId', 'ZoneId', 'TaskState', 'TargetProId', 'isFraud']\n   df = pd.DataFrame(df3)\n   print (df)\n\n#----------------------preprocessing----------------\n\ndef string_to_int(s):\n   ord3 = lambda x : '%.3d' % ord(x)\n   return int(''.join(map(ord3, s)))\n\nfor i in range(1,24857):\n   df.iloc[i,0]=string_to_int(df.iloc[i,0])\n   df.iloc[i,1]=string_to_int(df.iloc[i,1])\n   df.iloc[i,3]=string_to_int(df.iloc[i,3])\n   df.iloc[i,8]=string_to_int(df.iloc[i,8]) \n   df.iloc[i,9]=string_to_int(df.iloc[i,9])\n   df.iloc[i,10]=string_to_int(df.iloc[i,10]) \n   df.iloc[i,11]=string_to_int(df.iloc[i,11])\n   df.iloc[i,12]=string_to_int(df.iloc[i,12])\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "machine-learning",
+        "deep-learning",
+        "neural-network",
+        "pytorch"
+      ],
+      "comment_count": 1,
+      "question_id": 67071168,
+      "title": "In pytorch, how to train a model with two or more outputs?",
+      "body": "<pre><code>output_1, output_2 = model(x)\nloss = cross_entropy_loss(output_1, target_1)\nloss.backward()\noptimizer.step()\n\nloss = cross_entropy_loss(output_2, target_2)\nloss.backward()\noptimizer.step()\n</code></pre>\n<p>However, when I run this piece of code, I got this error:</p>\n<pre><code>RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation: [torch.FloatTensor [1, 4]], which is output 0 of TBackward, is at version 2; expected version 1 instead. Hint: enable anomaly detection to find the operation that failed to compute its gradient, with torch.autograd.set_detect_anomaly(True).\n</code></pre>\n<p>Then, I really wanna know what I am supposed to do to train a model with 2 or more outputs</p>\n"
+    },
+    {
+      "tags": [
+        "algorithm",
+        "machine-learning",
+        "logistic-regression",
+        "naivebayes"
+      ],
+      "comment_count": 1,
+      "question_id": 67071041,
+      "title": "Logistic Regression and Naive Bayes with infinite data",
+      "body": "<p>I'm comparing the LR and NB performance on different datasets. And suddenly I am wondering what if we have a big dataset that is infinitely large (at least ensure both models trained to its best??). How would two algorithms work? Usually, LR tends to be overfitting and it requires regularisation. Would in this case it also tend to be overfitting?</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "machine-learning",
+        "train-test-split",
+        "catboost"
+      ],
+      "comment_count": 1,
+      "question_id": 67070907,
+      "title": "Using Catboost Classifier to convert categorical columns",
+      "body": "<p>I'm trying to apply CatBoost to one of my columns for categorical features but get following error:</p>\n<pre><code>CatBoostError: Invalid type for cat_feature[non-default value idx=0,feature_idx=2]=68892500.0 : cat_features must be integer or string, real number values and NaN values should be converted to string.\n</code></pre>\n<p>I could use one-hot encoding but many on here say CatBoost seems to better at handling this and less prone to overfitting the model.</p>\n<p>My data consists of three columns, 'Country', 'year', 'phone users'. Target is 'Country' and 'year' and 'phone users' are Feature.</p>\n<p>Data:</p>\n<pre><code>Country   year   phone users\nIreland   1989   978\nFrance    1990   854\nSpain     1991   882\nTurkey    1992   457\n...       ...    ...\n</code></pre>\n<p>My code so far:</p>\n<pre><code>X = df.loc[115:305]\ny = df.loc[80:, 0]\n\ncat_features = list(range(0, X_pool.shape[1]))\nOutput: [0, 1, 2]\n\nX_train, X_val, y_train, y_val = train_test_split(X_pool, y_pool, \ntest_size=0.2, random_state=0)\n\ncbc = CatBoostClassifier(iterations=5, learning_rate=0.1)\n\ncbc.fit(X_train, y_train, eval_set=(X_val, y_val), \ncat_features=cat_features, verbose=False)\n\nprint(&quot;Model Evaluation Stage&quot;)\n</code></pre>\n<p>Do I need to run LabelEncoder before fitting to catboost model? What am I missing here?</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "tensorflow",
+        "machine-learning",
+        "keras",
+        "pip"
+      ],
+      "comment_count": 3,
+      "question_id": 51756108,
+      "title": "ImportError: cannot import name &#39;relu6&#39;",
+      "body": "<p>I was trying to run a machine learning code based on Keras/TensorFlow. When running in <code>tensorflow</code> environment, I encounter the following error:</p>\n\n<pre><code>from keras_applications.mobilenet import relu6\nImportError: cannot import name 'relu6'\n</code></pre>\n\n<p>How can I solve it? </p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "pandas",
+        "dataframe",
+        "machine-learning"
+      ],
+      "comment_count": 1,
+      "question_id": 54757552,
+      "title": "How to add dummies to Pandas DataFrame?",
+      "body": "<p>I have a data_df that looks like:</p>\n\n<pre><code>   price vehicleType  yearOfRegistration    gearbox  powerPS  model  kilometer fuelType       brand notRepairedDamage  postalCode\n0  18300       coupe                2011    manuell      190    NaN     125000   diesel        audi                ja       66954\n1   9800         suv                2004  automatik      163  grand     125000   diesel        jeep               NaN       90480\n2   1500  kleinwagen                2001    manuell       75   golf     150000   benzin  volkswagen              nein       91074\n3   3600  kleinwagen                2008    manuell       69  fabia      90000   diesel       skoda              nein       60437\n4    650   limousine                1995    manuell      102    3er     150000   benzin         bmw                ja       33775\n</code></pre>\n\n<p>Tried to convert classification columns (<code>vehicleType</code>) to dummies (\"one hot encoding\"):</p>\n\n<pre><code>columns = [ 'vehicleType' ] #, 'gearbox', 'model', 'fuelType', 'brand', 'notRepairedDamage' ]\nfor column in columns:\n  dummies = pd.get_dummies(data_df[column], prefix=column)\n  data_df.drop(columns=[column], inplace=True)\n  data_df = data_df.add(dummies, axis='columns')\n</code></pre>\n\n<p>But the original data is missing:</p>\n\n<pre><code>  brand fuelType gearbox  kilometer model notRepairedDamage  ...  vehicleType_coupe  vehicleType_kleinwagen  vehicleType_kombi  vehicleType_limousine  vehicleType_suv  yearOfRegistration\n0   NaN      NaN     NaN        NaN   NaN               NaN  ...                NaN                     NaN                NaN                    NaN              NaN                 NaN\n1   NaN      NaN     NaN        NaN   NaN               NaN  ...                NaN                     NaN                NaN                    NaN              NaN                 NaN\n2   NaN      NaN     NaN        NaN   NaN               NaN  ...                NaN                     NaN                NaN                    NaN              NaN                 NaN\n3   NaN      NaN     NaN        NaN   NaN               NaN  ...                NaN                     NaN                NaN                    NaN              NaN                 NaN\n4   NaN      NaN     NaN        NaN   NaN               NaN  ...                NaN                     NaN                NaN                    NaN              NaN                 NaN\n</code></pre>\n\n<p>So, how to replace a given column with the dummies?</p>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "web",
+        "3d",
+        "babylonjs"
+      ],
+      "comment_count": 1,
+      "question_id": 67069343,
+      "title": "How to apply custom fabric pattern on 3D shirt and clothing dynamically",
+      "body": "<p>I am trying to work on a project that requires taking in any custom image of any pattern and apply it to a shirt, pant, other men's clothing and create a realistic 3D looking output. This can of course be done using Photoshop (<a href=\"https://www.youtube.com/watch?v=UG0-V95qmPg\" rel=\"nofollow noreferrer\">Eg</a>), but I want to do this dynamically using code on a web app.</p>\n<p>I already have some working code, but it only generates 2D looking outputs.\n<a href=\"https://i.stack.imgur.com/Br1F3.jpg\" rel=\"nofollow noreferrer\">Here's an example image</a>, the left is the 2D output of my code, the right is the 3D looking output created using Photoshop. I want the left to look more like the right.</p>\n<p>I have come across this <a href=\"https://www.tontossport.com/custom-polo-uniform/women-short-sleeve-polo-shirts/white-short-sleeve-polo-shirts-with-pockets-504\" rel=\"nofollow noreferrer\">custom sport shit designing website</a>, and I don't really understand how it works. I know it uses BabylonJS/WebGL for the 3D rendering of the shirt on the web, and SVG for being able to select individual parts of the shirt (not really sure how that works either because my understanding was SVG only works on 2D), but the site allows you to take any custom image / pattern and apply it anywhere onto the 3D model / shirt, scale it up or down and it realistically warps and contorts the 2D image 3 dimensionally around the 3D object on the fly. It just works. I haven't come across other websites that allow you to do this so dynamically. Everyone else seems to pre-generate the images or 3D models and clothing and just render them all (<a href=\"https://www.pikcells.com/portfolio/webgl-shirt-configurator\" rel=\"nofollow noreferrer\">Eg1</a>, <a href=\"https://www.tailorstore.co.in/shirt-designer\" rel=\"nofollow noreferrer\">Eg2</a>).</p>\n<p>Do I need to 3D scan a real life mannequin with the clothing on for making this work? And then render it using WebGL and overlay the custom fabric on it inside <code>canvas</code>? How does that even work?</p>\n<p>I have also come across <a href=\"https://arxiv.org/abs/1908.00114\" rel=\"nofollow noreferrer\">this paper</a> which goes into depth about how to build 3D models of clothing using 2D RGB front and back images using an ML model. The paper is mentioned in <a href=\"https://github.com/lzhbrian/Clothes-3D#softwares\" rel=\"nofollow noreferrer\">this github repo</a>. I am wondering if I could use this to create the 3D models of the clothing using the 2D images I am generating with my code right now.</p>\n<p>I am also wondering if I can use Photoshop API or any other image editing software API to dynamically create a realistic output using a pre-defined style effect on the backend, and then send it to the client side.</p>\n<p>I have also come across paid 3rd party websites (<a href=\"https://www.picario.com/en/home/\" rel=\"nofollow noreferrer\">Eg</a>) that seem to provide this feature as a service, but I would rather build and use my own solution here.</p>\n<p>Are there any other simpler options to solving this problem? How would you approach this?</p>\n"
+    },
+    {
+      "tags": [
+        "android",
+        "machine-learning",
+        "dataset"
+      ],
+      "comment_count": 1,
+      "question_id": 67069109,
+      "title": "how to save android features in csv file with androguard or any other apk analyze tool",
+      "body": "<p>I am studying AI, MACHINE LEARNING.\ni don't know how to solve the data preprocessing.\nmy project topic is android malware detection with using machine learning\nI have planned using data set from CIC-ANDMAL2017.\nData set zip file have some malware(smsmalware,ransomware,etc..) and benign app.\nI want to make a training data csv file and testing data csv file including features.\nand i want to make automation code to extract feature in android apps.\nLet me know how to make csv file with my data set.\nand recommend some web-site about method to make csv file.</p>\n"
+    },
+    {
+      "tags": [
+        "python-3.x",
+        "machine-learning",
+        "parameters",
+        "pytorch",
+        "python-3.6"
+      ],
+      "comment_count": 1,
+      "question_id": 66975657,
+      "title": "Designing a Continuous Learning Chatbot. How can I open parameter files and write to them using Python 3?",
+      "body": "<p>I am currently working on Windows 10 in Python 3.6 and Pytorch in an IDE. I am referencing <a href=\"https://arxiv.org/pdf/1802.06024.pdf\" rel=\"nofollow noreferrer\">This Paper</a>\nfor the project, I am working on and using <a href=\"https://github.com/madcpt/lifelong-interactive-learning-and-inference\" rel=\"nofollow noreferrer\">This Github Repository</a> to work the project. This developer used parameter files (as stated in the paper) to write new information to when the chatbot can't pull from its current state of knowledge or model. The goal here is to basically be able to create a simple retrieval-based chatbot. If it can't find a good enough answer, it asks for more info and then writes that info into these parameter files. The first priority is writing live information inputted to parameter files.</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "machine-learning",
+        "survival-analysis"
+      ],
+      "comment_count": 1,
+      "question_id": 67068423,
+      "title": "Survival analysis for predictive maintenance on one machine",
+      "body": "<p>I have date for failures on one engine, 10 failures in total over a several years period, does it makes sense to split the data at each failure event and use the data with 10 failures as if I have ten engines with 1 failure each? For this case I'm can not get more data.</p>\n"
+    },
+    {
+      "tags": [
+        "python-3.x",
+        "tensorflow",
+        "machine-learning",
+        "keras",
+        "tensorflow2.0"
+      ],
+      "comment_count": 1,
+      "question_id": 67068377,
+      "title": "Flesh out history of the model&#39;s inference",
+      "body": "<p>I want the model not to remember the history of its inference.\nLet me simplify this. I have a model trained in keras on top of tensorflow.\nLet us suppose that the model is trained to predict the class of an image.\nI have a bunch of images to test on. After loading the model, I could predict class of each image by putting it in a for loop.<br />\nBut the problem here is that I have images of variable size and I don't wanted to add any zeros to make it fixed length.\nThe training is done on fixed size images but I wanted the inference to accommodate variable size. With tensorflow==2.3,\nI could do it with a warning for first two images and then from the third image the model fails to predict.\nAs at least I can infer for the first two images, I wanted to use this behaviour in order to  infer for all the images.\nOne way I could do it is by loading the model in the loop, but it is taking a lot of time as for each image I should reload the trained model.\nThe other way could be by forgetting what the model has seen previously, in which case <strong>the model should treat each image as its first inference file</strong>.\nI hope the question is clear.\nCan anyone help me achieving this. Thanks in advance.</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "machine-learning",
+        "scikit-learn",
+        "random-forest"
+      ],
+      "comment_count": 1,
+      "question_id": 66960207,
+      "title": "How are the votes of individual trees calculated for Random Forest and Extra Trees in Sklearn?",
+      "body": "<p>I have been constructing my own Extra Trees (XT) classifier in Rust for binary classification. To verify correctness of my classifier, I have been comparing it against Sklearns implementation of XT, but I constantly get different results. I thought that there must be a bug in my code at first, but now I realize it's not a bug, but instead a different method of calculating votes amongst the different trees in the ensemble. In my code, each tree votes based on the most frequent classification in a leafs' subset of data. So for example, if we are traversing a tree, and find ourselves at a leaf node that has 40 classifications of <em>0</em>, and 60 classifications of <em>1</em>, the tree classifies the data as <em>1</em>.</p>\n<p>Looking at Sklearn's documentation for XT (<a href=\"https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html\" rel=\"nofollow noreferrer\">As seen here</a>), I read the following line in regards to the <em>predict</em> method</p>\n<blockquote>\n<p>The predicted class of an input sample is a vote by the trees in the forest, weighted by their probability estimates. That is, the predicted class is the one with highest mean probability estimate across the trees.</p>\n</blockquote>\n<p>While this gives me some idea about how individual trees vote, I still have more questions. Perhaps an exact mathematical expression of how these weights are calculated would help, but I have yet to find one in the documentation.</p>\n<p>I will provide more details in the upcoming paragraphs, but I wish to ask my question concisely here. <em>How are these weights calculated at a high level, what are the mathematics behind it? Is there a way to change how individual XT trees calculate their votes?</em></p>\n<p><strong>---------------------------------------- Additional Details -----------------------------------------------</strong></p>\n<p>For my current tests, this is how I build my classifier</p>\n<pre><code>classifier = ExtraTreesClassifier(n_estimators=5, criterion='gini', \n              max_depth=1, max_features=5,random_state=0)\n</code></pre>\n<p>To predict unseen transactions <em>X</em>, I use <code>classifier.predict(X)</code>. Digging through the source code of <em>predict</em> (<a href=\"https://github.com/scikit-learn/scikit-learn/blob/95119c13a/sklearn/ensemble/_forest.py#L609\" rel=\"nofollow noreferrer\">seen here, line 630-ish</a>), I see that this is all the code that executes for binary classification</p>\n<pre><code>proba = self.predict_proba(X)\nif self.n_outputs_ == 1:\n    return self.classes_.take(np.argmax(proba, axis=1), axis=0)\n</code></pre>\n<p>What this code is doing is relatively obvious to me. It merely determines the most likely classification of transactions by taking the argmax of <em>proba</em>. What I fail to understand is how this <em>proba</em> value is made in the first place. I beleive that the <em>predict_proba</em> method that <em>predict</em> uses is defined here at <a href=\"https://github.com/scikit-learn/scikit-learn/blob/95119c13a/sklearn/ensemble/_forest.py#L649\" rel=\"nofollow noreferrer\">Line 650-ish</a>. Here is what I believe the relevant source code to be</p>\n<pre><code>check_is_fitted(self)\n# Check data\nX = self._validate_X_predict(X)\n\n# Assign chunk of trees to jobs\nn_jobs, _, _ = _partition_estimators(self.n_estimators, self.n_jobs)\n\n# avoid storing the output of every estimator by summing them here\nall_proba = [np.zeros((X.shape[0], j), dtype=np.float64)\n                 for j in np.atleast_1d(self.n_classes_)]\nlock = threading.Lock()\nParallel(n_jobs=n_jobs, verbose=self.verbose,\n         **_joblib_parallel_args(require=&quot;sharedmem&quot;))(\n    delayed(_accumulate_prediction)(e.predict_proba, X, all_proba,\n                                    lock)\n    for e in self.estimators_)\n\nfor proba in all_proba:\n    proba /= len(self.estimators_)\n\nif len(all_proba) == 1:\n    return all_proba[0]\nelse:\n    return all_proba\n</code></pre>\n<p>I fail to understand what exactly is being calculated here. This is where my trail goes a bit cold and I get confused, and find myself in need of help.</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "tensorflow",
+        "machine-learning",
+        "keras",
+        "jupyter-notebook"
+      ],
+      "comment_count": 7,
+      "question_id": 67064566,
+      "title": "High accuracy but bad predictions on Keras Tensorflow",
+      "body": "<p>I have a 9 class dataset with 7000 images, I use MobilenetV2 for training my set and ImageGenerator, resulting in 82% percent val accuracy. But when i predict my test images, it always predicts a false class. I have no idea what is wrong with it.Here is my code;</p>\n<p>My ImageGenerator:</p>\n<pre><code>image_gen = ImageDataGenerator(rotation_range = 20,\n                               width_shift_range=0.12,\n                               height_shift_range=0.12,\n                               shear_range=0.1,\n                               zoom_range = 0.06,\n                               horizontal_flip=True,\n                               fill_mode='nearest',\n                               rescale=1./255)\n</code></pre>\n<p>My model:</p>\n<pre><code>Model = Sequential()\n\nModel.add(Conv2D(filters=32,kernel_size=(3,3),input_shape=image_shape,activation='relu'))\nModel.add(MaxPool2D(pool_size=(2,2)))\n\nModel.add(Conv2D(filters=64,kernel_size=(3,3),input_shape=image_shape,activation='relu'))\nModel.add(MaxPool2D(pool_size=(2,2)))\n\nModel.add(Conv2D(filters=64,kernel_size=(3,3),input_shape=image_shape,activation='relu'))\nModel.add(MaxPool2D(pool_size=(2,2)))\n\nModel.add(Conv2D(filters=64,kernel_size=(3,3),input_shape=image_shape,activation='relu'))\nModel.add(MaxPool2D(pool_size=(2,2)))\n\nModel.add(Flatten())\n\nModel.add(Dense(256,activation='relu'))\n\nModel.add(Dense(9,activation='softmax'))\n</code></pre>\n<p>MobilenetV2:</p>\n<pre><code>height=224\nwidth=224\nimg_shape=(height, width, 3)\ndropout=.3\nlr=.001\nclass_count=9 # number of classes\nimg_shape=(height, width, 3)\nbase_model=tf.keras.applications.MobileNetV2( include_top=False, input_shape=img_shape, pooling='max', weights='imagenet') \nx=base_model.output\nx=keras.layers.BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001 )(x)\nx = Dense(512, kernel_regularizer = regularizers.l2(l = 0.016),activity_regularizer=regularizers.l1(0.006),\n                bias_regularizer=regularizers.l1(0.006) ,activation='relu', kernel_initializer= tf.keras.initializers.GlorotUniform(seed=123))(x)\nx=Dropout(rate=dropout, seed=123)(x)        \noutput=Dense(class_count, activation='softmax',kernel_initializer=tf.keras.initializers.GlorotUniform(seed=123))(x)\nModel = keras.models.Model(inputs=base_model.input, outputs=output)\nModel.compile( loss='categorical_crossentropy', metrics=['accuracy'],optimizer='Adamax') \n</code></pre>\n<p>My Rlronp:</p>\n<pre><code>rlronp=tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=1, verbose=1, mode='auto', min_delta=0.0001, cooldown=0, min_lr=0)\n</code></pre>\n<p>My train_image_gen:</p>\n<pre><code>train_image_gen = image_gen.flow_from_directory(train_path,\n                                                target_size=image_shape[:2],\n                                                color_mode='rgb',\n                                                batch_size=batch_size,\n                                                class_mode='categorical')\n</code></pre>\n<p>My test_image_gen:</p>\n<pre><code>test_image_gen = image_gen.flow_from_directory(test_path,\n                                                target_size=image_shape[:2],\n                                                color_mode='rgb',\n                                                batch_size=batch_size,\n                                            class_mode='categorical',shuffle=False)\n</code></pre>\n<p>My earlystop:</p>\n<pre><code>early_stop = EarlyStopping(monitor='val_loss',patience=4)\n</code></pre>\n<p>My Model fit:</p>\n<pre><code>results = Model.fit(train_image_gen,epochs=20,\n                              validation_data=test_image_gen,callbacks=[rlronp,early_stop],class_weight=class_weight\n                              )\n</code></pre>\n<p>Training and accuracy:</p>\n<pre><code>Epoch 20/20 200/200 [==============================] - 529s 3s/step -\n loss: 0.3995 - accuracy: 0.9925 - val_loss: 0.8637 - val_accuracy: 0.8258\n</code></pre>\n<p><strong>My problem is</strong> when i predict an image from test set, it predicts the false class, 90% of time.</p>\n<p>For example here, it has to be 3rd class, but max is on 2nd class.</p>\n<pre><code>array([[0.08064549, 0.04599327, 0.27055973, 0.05219262, 0.055945  ,\n        0.25723988, 0.07608379, 0.10404343, 0.05729679]], dtype=float32)\n</code></pre>\n<p><strong>I tried</strong> collecting my own dataset with 156 class and 2.5k images, but it was even worse.</p>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "scikit-learn",
+        "cluster-analysis"
+      ],
+      "comment_count": 1,
+      "question_id": 67055355,
+      "title": "About sklearn kmeans clustering",
+      "body": "<pre><code>from sklearn.cluster import KMeans\n\nkmeans = KMeans(n_clusters=6)\n\npredict = kmeans.fit_predict(x)\n\nkm_model = kmeans.fit(x)\nlabels = km_model.labels_\nlabels = list(labels)\n</code></pre>\n<p>From labels, I used count() to represent {0: 8195, 1: 7403, <strong>2: 4595</strong>, 3: 5634, <strong>4: 4358</strong>, 5: 5215}</p>\n<p>From predict, the result by count() is {0: 8195, 1: 7403, <strong>2: 4358</strong>, 3: 5634, <strong>4: 4595</strong>, 5: 5215}</p>\n<p>But why clustering results between kmeans.fit() and km_models.labels_ are different?</p>\n<p>P.S.\npredict[:10] gives [5, 0, 2, 3, 4, 3, 5, 3, 0, 1]; labels[:10] gives [5, 0, 4, 3, 2, 3, 5, 3, 0, 1]</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "tensorflow",
+        "machine-learning",
+        "keras"
+      ],
+      "comment_count": 1,
+      "question_id": 67065868,
+      "title": "Training different branches of model network with tf.switch_case",
+      "body": "<p>I want to create a neural network in which different branches of the network are trained depending on the t_input. So the t_input can be either 0 or 1 and depending on that only the correct branch will be trained :</p>\n<pre><code>import tensorflow as tf\nfrom tensorflow.keras.layers import Input, Lambda, Dense\n\nx = np.random.uniform(size=(10, 10))\nt = np.random.binomial(100, 0.5)\n\nt_input = Input(batch_shape=(1,), dtype='int32', name=&quot;t_input&quot;)\nx_input = Input(shape=(x.shape[0]), name='x_input')\n\nx = Dense(32)(x_input)\n\nx1 = Dense(16)(x)\nx1 = Dense(8)(x1)\nx1 = Dense(1)(x1)\n\nx2 = Dense(16)(x)\nx2 = Dense(8)(x2)\nx2 = Dense(1)(x2)\n\nx1 = lambda: x1\nx2 = lambda: x2\n\nr = Lambda(lambda x: tf.switch_case(x, branch_fns={0: x1, 1: x2}))(t_input)\n\n# r = tf.case([(tf.equal(t_input, 1), x1), (tf.equal(t_input, 0), x2)], default=x2, exclusive=True)\n\nmodel = tf.keras.models.Model(inputs=t_input, outputs=r)\n\nprint(model.predict([1]))\n</code></pre>\n<p>However, I cannot make this work as it is not flexible enough to use KerasTensors :</p>\n<pre><code>Traceback (most recent call last):\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\IPython\\core\\interactiveshell.py&quot;, line 3437, in run_code\n    exec(code_obj, self.user_global_ns, self.user_ns)\n  File &quot;&lt;ipython-input-59-92db0d55c181&gt;&quot;, line 23, in &lt;module&gt;\n    r = Lambda(lambda x: tf.switch_case(x, branch_fns={0: x1, 1: x2}))(t_input)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\keras\\engine\\base_layer.py&quot;, line 952, in __call__\n    input_list)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\keras\\engine\\base_layer.py&quot;, line 1091, in _functional_construction_call\n    inputs, input_masks, args, kwargs)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\keras\\engine\\base_layer.py&quot;, line 822, in _keras_tensor_symbolic_call\n    return self._infer_output_signature(inputs, args, kwargs, input_masks)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\keras\\engine\\base_layer.py&quot;, line 863, in _infer_output_signature\n    outputs = call_fn(inputs, *args, **kwargs)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\keras\\layers\\core.py&quot;, line 917, in call\n    result = self.function(inputs, **kwargs)\n  File &quot;&lt;ipython-input-59-92db0d55c181&gt;&quot;, line 23, in &lt;lambda&gt;\n    r = Lambda(lambda x: tf.switch_case(x, branch_fns={0: x1, 1: x2}))(t_input)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\ops\\control_flow_ops.py&quot;, line 3616, in switch_case\n    return _indexed_case_helper(branch_fns, default, branch_index, name)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\ops\\control_flow_ops.py&quot;, line 3326, in _indexed_case_helper\n    lower_using_switch_merge=lower_using_switch_merge)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\ops\\cond_v2.py&quot;, line 1040, in indexed_case\n    op_return_value=branch_index))\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\framework\\func_graph.py&quot;, line 995, in func_graph_from_py_func\n    expand_composites=True)\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\util\\nest.py&quot;, line 659, in map_structure\n    structure[0], [func(*x) for x in entries],\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\util\\nest.py&quot;, line 659, in &lt;listcomp&gt;\n    structure[0], [func(*x) for x in entries],\n  File &quot;C:\\Users\\gen06917\\PycharmProjects\\BaysianTarnet\\.venv\\lib\\site-packages\\tensorflow\\python\\framework\\func_graph.py&quot;, line 952, in convert\n    (str(python_func), type(x)))\nTypeError: To be compatible with tf.eager.defun, Python functions must return zero or more Tensors; in compilation of &lt;function &lt;lambda&gt; at 0x000001ED0876EAF8&gt;, found return value of type &lt;class 'function'&gt;, which is not a Tensor.\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "deep-learning",
+        "neural-network",
+        "generative-adversarial-network"
+      ],
+      "comment_count": 1,
+      "question_id": 67050649,
+      "title": "Conditional GAN doesn&#39;t work on high dimension inputs",
+      "body": "<p>I am training a cGAN with projection discriminator (<a href=\"https://github.com/crcrpar/pytorch.sngan_projection\" rel=\"nofollow noreferrer\">here</a>) on Sphere dataset (<a href=\"https://arxiv.org/pdf/1801.02774.pdf\" rel=\"nofollow noreferrer\">here</a>). <em>&quot;The data distribution consists of two concentric spheres in n dimensions: we generate a random\nx where L<sub>2</sub> norm of x is either 1 or R, with equal probability assigned to each norm (for this work we choose R = 1.3). We associate with each x a label y such that y = 0 if ||x||<sub>2</sub> = 1 and y = 1 if ||x||<sub>2</sub> = R&quot;</em></p>\n<p>to test my cGAN, I calculate the norm of the generated samples. for low dimension inputs (e.g., dim=10) I get the correct norms.\nI, however, do not get correct norms for higher dimensions (e.g, dim&gt;=100).</p>\n<p>Any suggestions?</p>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "neural-network",
+        "backpropagation"
+      ],
+      "comment_count": 1,
+      "question_id": 67050693,
+      "title": "Cannot comprehend the idea behind gradient descent of backpropagation",
+      "body": "<p>I've been following <a href=\"http://neuralnetworksanddeeplearning.com/chap2.html\" rel=\"nofollow noreferrer\">this source</a> to learn about backprop. According to it, the algorithm of backprop with an example set is as follows.</p>\n<p><a href=\"https://i.stack.imgur.com/mBvhH.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/mBvhH.png\" alt=\"enter image description here\" /></a></p>\n<p>I'll keep my code behind the scene for now, but the idea is that I stored the errors and neuron activation values to access them when computing the final values to subtract from weights.</p>\n<p>As far as I see the third step of the algorithm wants me to find an average of the results of multiplication of delta matrices from l-th layer and activation matrices from l-1-th layer for each example set. Both of these are actually matrices which only contain one row and j columns where j is the amount of neurons in the l-th layer. Obviously the amount of neurons in neighbouring layers may differ, which makes matmul unfeasible.</p>\n<ol>\n<li>How am I supposed to implement <a href=\"https://i.stack.imgur.com/eSiBc.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/eSiBc.png\" alt=\"enter image description here\" /></a>, if the amount of values in the both matrices differs?</li>\n<li>Even if I managed to get the result of such multiplication, this result would only be of one value. The weight is only superscripted by a layer number, which means it is a vector. Does the descent imply me to subtract the same value from each weight value in a weight vector?</li>\n</ol>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "reinforcement-learning"
+      ],
+      "comment_count": 1,
+      "question_id": 67067327,
+      "title": "Does Exploration Algorithm Apply in On-Policy RL?",
+      "body": "<p>On-Policy RL Algorithms such as PPO, Policy Gradient are stochastic by nature. They can sample actions and thus explore the environment. However, are exploration strategies such as <code>epsilon-greedy</code> applicable in such scenarios?</p>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "neural-network",
+        "pytorch"
+      ],
+      "comment_count": 1,
+      "question_id": 67066452,
+      "title": "Is this a right way to train and test the model using Pytorch?",
+      "body": "<p>I am trying to implement a binary classification with Neural Networks with Pytorch to train a model as shown below:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>model = nn.Sequential(\n    bnn.BayesLinear(prior_mu=0, prior_sigma=0.1, in_features=196, out_features=300),\n    nn.ReLU(),\n    bnn.BayesLinear(prior_mu=0, prior_sigma=0.1, in_features=300, out_features=196),\n)\ncross_entropy_loss = nn.CrossEntropyLoss()\nklloss = bnn.BKLLoss(reduction='mean', last_layer_only=False)\nklweight = 0.01\noptimizer = optim.Adam(model.parameters(), lr=0.01)\n</code></pre>\n<p>Traing part:</p>\n<pre class=\"lang-py prettyprint-override\"><code> #training\n    for step in range(200):\n        models = model(data_tensor)\n        cross_entropy = cross_entropy_loss(models, target_tensor)\n        #cross_entropy = 0\n        kl = klloss(model)\n        total_cost = cross_entropy + klweight*kl\n    \n        optimizer.zero_grad()\n        total_cost.backward()\n        optimizer.step()\n      \n    _, predicted = torch.max(models.data, 1)\n    final = target_tensor.size(0)\n    correct = (predicted == target_tensor).sum()\n    print('- Accuracy: %f %%' % (100 * float(correct) / final))\n    print('- CE : %2.2f, KL : %2.2f' % (cross_entropy.item(), kl.item()))\n</code></pre>\n<p><strong>Question 1:</strong> Is it a right way to train a model? In many articles I found that there is a section to iterate over the DataLoader for training data, such as :</p>\n<pre class=\"lang-py prettyprint-override\"><code>for i, data in enumerate(trainloader, 0):\n # Get inputs\n inputs, targets = data\n</code></pre>\n<p><strong>Question 2:</strong> What is the use of this loop if I can directly give the data features(inputs) as data_tensor and data labels(target) as target_tensor? Because when iterating through data loader, it takes more time.</p>\n<p>I am not sure how to test my model. I did as given below:</p>\n<pre class=\"lang-py prettyprint-override\"><code>correct = 0\ntotal = 0\nwith torch.no_grad():\n    for step in range(data_tensor_test.size(0)):\n        models = model(data_tensor_test)\n        _, predicted = torch.max(models.data, 1)\n        total += target_tensor_test.size(0)\n        correct += (predicted == target_tensor_test).sum().item()\n\nprint('Accuracy of the test data: %d %%' % (\n    100 * correct / total))\n</code></pre>\n<p><strong>Question 3:</strong> Is it right way to test the model that I trained above?</p>\n"
+    },
+    {
+      "tags": [
+        "machine-learning"
+      ],
+      "comment_count": 1,
+      "question_id": 67066512,
+      "title": "Use Machine Learning Libraries or Create our own Machine Learning models?",
+      "body": "<p>I am a student, and I want to know what the real world thinks about this.\nMy university taught me to implement everything from scratch and I am wondering is the real work life gonna be similar to creating everything from scratch.</p>\n<p>I wanna ask, are using machine learning libraries better than creating our own machine learning models/algorithms?\nIn the real world, do we need to create our own machine learning models/algorithms often?\nIs there any differences between using libraries like sci-kit learn and creating our own machine learning algorithms?</p>\n<p>Should I use libraries or should I make a machine learning model myself?</p>\n<p>Let’s just say for example it is for:</p>\n<ol>\n<li>IOT Projects,</li>\n<li>Predicting Financial Market Data Projects,</li>\n<li>Computer Vision Projects.</li>\n</ol>\n<p>When should I use machine learning libraries and when should I create my own algorithms/models?\nAlso, what should I take into consideration when using machine learning libraries and when making machine learning algorithms myself?</p>\n<p>Looking forward to hearing your answers and opinions. Thank you.</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "tensorflow",
+        "machine-learning",
+        "keras",
+        "computer-vision"
+      ],
+      "comment_count": 1,
+      "question_id": 67065292,
+      "title": "How can I use images from a folder as a target in Keras?",
+      "body": "<p>I am currently trying to develop an autoencoder where <strong>the input image is going to be different from the target image.</strong> In fact I want to have a latent space which I want to use as features for other model in order to do regression. Currently, I have two folders for the autoencoder which are organized as this (note that train, test and validation are filled with images):</p>\n<ul>\n<li>main\n<ul>\n<li>originals\n<ul>\n<li>train</li>\n<li>test</li>\n<li>validation</li>\n</ul>\n</li>\n<li>groundtruth\n<ul>\n<li>train</li>\n<li>test</li>\n<li>validation</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<p>However, it is a big dataset (more than 5000 images) so it doesn't fit in memory so I can't just read the images and put them in an array. I was able to use flow_from_directory to use an autoencoder when the target was the same image putting target = 'input' as parameter, but now I want to use my groundtruth images.</p>\n<pre><code>from keras.preprocessing.image import ImageDataGenerator\n\ndatagen = ImageDataGenerator(rescale=1/255)\n\ntrain_orig_it = datagen.flow_from_directory(ROOT_PATH + 'originals/', classes = ['train'], subset = 'training', class_mode = None, target_size = (SIZE, SIZE), batch_size = 64)\ntrain_ground_it = datagen.flow_from_directory(ROOT_PATH + 'groundtruth/', classes = ['train'], class_mode = None, batch_size = 64)\nvalid_orig_it = datagen.flow_from_directory(ROOT_PATH + 'originals/', classes = ['validation'], subset = 'validation', class_mode = None, batch_size = 64)\nvalid_ground_it = datagen.flow_from_directory(ROOT_PATH + 'groundtruth/', classes = ['validation'], class_mode = None, batch_size = 64)\n</code></pre>\n<p>I have tried to fit it like in the code below, choosing train_orig_it as X and train_ground_it as y. But it is giving me the error ValueError: <code>y</code> argument is not supported when using <code>keras.utils.Sequence</code> as input.</p>\n<pre><code>history = conv_ae.fit(train_orig_it, train_ground_it, steps_per_epoch = train_orig_it.samples // BATCH_SIZE, epochs = EPOCHS)\n</code></pre>\n<p>So how can I fit my target as images using keras flow_from_directory?</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "machine-learning"
+      ],
+      "comment_count": 1,
+      "question_id": 67061818,
+      "title": "What model should be used for vector to scalar time series prediction",
+      "body": "<p>I'm new to machine learning and I'm trying to work on a problem and the data looks like the following:</p>\n<pre class=\"lang-none prettyprint-override\"><code>Date/Time            Tchg   Tcold   Pchg    Qchg    Flow    CUF  dCUF\n1999-07-20 00:00:00 479.606 550.187 1238.22 94.1212 0.0 0.00492  0.00001\n1999-07-21 10:20:00 480.169 550.187 2238.22 94.3004 0.0 0.00492  0\n1999-07-21 00:00:00 479.606 550.187 1238.22 94.1212 0.0 0.00496  0.00004\n1999-07-22 00:17:42 279.606 550.187 1238.22 94.1212 0.0 0.00496  0\n1999-07-22 03:43:03 279.606 550.187 1238.22 94.1212 1.0 0.00496  0\n1999-07-22 00:00:00 279.606 350.187 2238.22 94.1212 1.0 0.00497 10.000011\n</code></pre>\n<ol>\n<li>The data set has 6 columns with 5 of them will be input and CUF to be predicted. The dCUF is just the change of CUF from previous row.</li>\n<li>During each day the 5 inputs will be collected from sensor for several times and each time they may change. Based on the each collected data, CUF may change but it's only updated at the end of the day.</li>\n<li>Each row input actually may create a change of CUF from previous row (time history) but it's not shown.</li>\n</ol>\n<p>I'm  thinking of combining the input for each day which is an array of n x 5 (n depends on how many times the input data are collected and is not fixed) and then try to predict the dCUF which is the change of CUF for each day.</p>\n<p>My questions are:</p>\n<ol>\n<li>Will this be predictable since we don't have correct CUF at each collected time?</li>\n<li>If this is predictable, what kind of data manipulation should I do and what model should I use?</li>\n</ol>\n"
+    },
+    {
+      "tags": [
+        "c#",
+        "machine-learning",
+        "ml.net"
+      ],
+      "comment_count": 1,
+      "question_id": 58238406,
+      "title": "Understanding spikes with Microsoft.ML and DetectIidSpike",
+      "body": "<p>I'm using <code>Microsoft.ML</code> and <code>Microsoft.ML.TimeSeries</code> to predict spikes in a set of numbers. I have a hard time understanding the results I'm seeing.</p>\n\n<p>Here is my code:</p>\n\n<pre class=\"lang-cs prettyprint-override\"><code>var counts = new[] { 1, 3, 0, 4, 5, 5, 4, 3, 3, 0, 13, 8, 1, 61, 21, 40, 7, 7, 5, 6, 8, 33, 11, 5, 2, 10, 11, 18,\n    14, 23, 8, 17, 15, 13, 24, 29, 15, 20, 29, 19, 18, 17, 23, 47, 7, 14, 26, 28, 5, 22, 47, 22, 20, 9, 40, 6, 8,\n    4, 10, 10, 1, 4, 27, 3, 3, 7, 6, 12, 8, 3, 1, 2, 0, 0, 2, 0, 2, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 2 };\nvar input = counts.Select(x =&gt; new Input { Count = x });\n\nvar mlContext = new MLContext();\nIDataView data = mlContext.Data.LoadFromEnumerable(input);\nvar iidSpikeEstimator =\n    mlContext.Transforms.DetectIidSpike(nameof(Output.Prediction), nameof(Input.Count), 95, counts.Length / 4);\nvar empty = mlContext.Data.LoadFromEnumerable(new List&lt;Input&gt;());\nITransformer iidSpikeTransform = iidSpikeEstimator.Fit(empty);\nIDataView transformedData = iidSpikeTransform.Transform(data);\nvar predictions = mlContext.Data.CreateEnumerable&lt;Output&gt;(transformedData, false);\n\nforeach (var prediction in predictions)\n{\n    Console.WriteLine($\"{prediction.Prediction[0]}\\t{prediction.Prediction[1]}\\t{prediction.Prediction[2]}\");\n}\n</code></pre>\n\n<p>I'm using the following input and prediction classes:</p>\n\n<pre class=\"lang-cs prettyprint-override\"><code>class Input\n{\n    public float Count { get; set; }\n}\n\nclass Output\n{\n    [VectorType(3)]\n    public double[] Prediction { get; set; }\n}\n</code></pre>\n\n<p>The output from the prediction looks like this:</p>\n\n<pre><code>0       1       0,5\n0       3       0,0227500628872564\n0       0       0,0800026155568392\n0       4       0,0733626073142035\n0       5       0,0932462626257468\n0       5       0,190871542788827\n0       4       0,379365893907011\n0       3       0,452249112542357\n0       3       0,454337555107054\n0       0       0,0965646168807073\n0       13      7,23183654849358E-07\n0       8       0,162796225508786\n0       1       0,26866445055949\n0       61      1E-08               &lt;-- why not a spike\n0       21      0,195321812351945\n0       40      0,0762898593217751\n0       7       0,481418456206597\n0       7       0,483562672962325\n0       5       0,441585392014299\n0       6       0,467300428950856\n0       8       0,484291998890946\n0       33      0,111856212216161\n0       11      0,441518762773849\n0       5       0,421979379033421\n0       2       0,348450809756736\n0       10      0,466840217502056\n0       11      0,454355922201826\n0       18      0,316468096964188\n0       14      0,410908187378685\n0       23      0,252048457884371\n0       8       0,422207338357772\n0       17      0,382816778395844\n0       15      0,439773264257255\n0       13      0,499329093726086\n0       24      0,269983517311637\n0       29      0,2086753725973\n0       15      0,496567280529924\n0       20      0,327020081694874\n0       29      0,147369517489864\n0       19      0,334164937331234\n0       18      0,381759336027671\n0       17      0,430897832263909\n0       23      0,25778090864275\n1       47      0,00250415226768458 &lt;-- agree\n0       7       0,200797162863148\n0       14      0,421036850271146\n0       26      0,230152726021095\n0       28      0,202263299629237\n0       5       0,107362758973973\n0       22      0,385731992498547\n1       47      0,0251788165486866 &lt;-- agree\n0       22      0,440930249298629\n0       20      0,489012267971093\n0       9       0,198173557199813\n0       40      0,100577620435893\n0       6       0,140406687351199\n0       8       0,193919165630175\n0       4       0,136113850848066\n0       10      0,273471906906776\n0       10      0,293134313053193\n0       1       0,134665458845283\n0       4       0,209906681773312\n0       27      0,285741557145236\n0       3       0,211526145085249\n0       3       0,230972979939345\n0       7       0,326126679501019\n0       6       0,322283486761539\n0       12      0,480655683498934\n0       8       0,376885091334182\n0       3       0,268871502200523\n0       1       0,243880218497084\n0       2       0,286817699304078\n0       0       0,245658326315034\n0       0       0,266308213133336\n0       2       0,317490216757222\n0       0       0,270180835461669\n0       2       0,357761804545598\n0       0       0,299759432885454\n0       0       0,263204845258311\n0       0       0,280257822339588\n0       4       0,486752376815113\n0       0       0,29899600168968\n0       0       0,31785768842959\n0       0       0,336269786978528\n0       0       0,33962160591499\n0       0       0,35130274405966\n0       0       0,318196919735171\n0       1       0,431070960185983\n0       1       0,44131445885367\n0       0       0,354063798338961\n0       0       0,372226649193085\n0       2       0,300492332964686\n</code></pre>\n\n<p>As illustrated inline, there are two spikes identified. It looks like pretty good predictions for me. What I don't understand is why the count on line 14 isn't marked as a spike. Counts are going between 0 and 13 up until the 14. number. Then suddenly jumps to 61. When looking at the data in a graph, the jump definitely looks like a spike to me.</p>\n\n<p>Can anyone help to make me understand what is going on there</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "numpy",
+        "machine-learning",
+        "scikit-learn"
+      ],
+      "comment_count": 3,
+      "question_id": 67049880,
+      "title": "Why I get different accuracy score from the same model in/outside for loop",
+      "body": "<p>In ML classification problem I'm doing a for loop with various models and pre-processing methods of scaling data. <br>\nWhen loop ends I want to replicate the best combination of model and pre-processing method by manually calling those functions. The accuracy is quite different (worse) from the one in the loop.<br></p>\n<pre><code>np.random.seed(0)\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=False, random_state=0)\n\nclassifiers = [ ('Logistic Regression', lr),\n                ('K Nearest Neighbors', knn),\n                ('Bagging Classifier', bc),\n                ('Classification Tree', dt),\n                ('SVM', svm),\n                ('Adaptive Boosting', ac),\n                ('Random Forest Classifier', rf)]\n\nscalers = [('MinMaxScaler', MinMaxScaler),\n           ('StandardScaler', StandardScaler),\n           ('Normalizer', Normalizer),\n           ('RobustScaler', RobustScaler)]\n\nscore_combined = []\nfor scaler in scalers:\n    for classifier in classifiers:\n        X_train_scaled = scaler[1].fit_transform(X_train)\n        classifier[1].fit(X_train_scaled, y_train)\n        X_test_scaled = scaler[1].transform(X_test)\n        y_pred = classifier[1].predict(X_test_scaled)\n        score_combined.append((classifier[0] + ' ' + scaler[0], accuracy_score(y_test, y_pred)))\n\nprint(pd.DataFrame(score_combined).sort_values(by=1, ascending=False).head(5))\n</code></pre>\n<pre><code>                                        0         1\n6   Random Forest Classifier MinMaxScaler  0.602837\n3        Classification Tree MinMaxScaler  0.595745\n7      Logistic Regression StandardScaler  0.595745\n21       Logistic Regression RobustScaler  0.595745\n14         Logistic Regression Normalizer  0.588652\n</code></pre>\n<p>Random Forrest with MinMaxScaler is the best combination so:</p>\n<pre><code>X_train_scaled = MinMaxScaler.fit_transform(X_train)\nrf.fit(X_train_scaled, y_train)\nX_test_scaled = MinMaxScaler.transform(X_test)\ny_pred = rf.predict(X_test_scaled)\nprint(accuracy_score(y_test, y_pred))\n</code></pre>\n<pre><code>0.5460992907801419\n</code></pre>\n<p>I want to know what causes that difference in the accuracy of model from the for loop and from the one outside of it.</p>\n"
+    },
+    {
+      "tags": [
+        "python-3.x",
+        "tensorflow",
+        "machine-learning",
+        "pytorch",
+        "parquet"
+      ],
+      "comment_count": 1,
+      "question_id": 60685684,
+      "title": "How to load large multi file parquet files for tensorflow/pytorch",
+      "body": "<p>I am trying to load a few parquet files from a directory into Python for tensorflow/pytorch. </p>\n\n<p>The files are too large to be loaded through the pyarrow.parquet functions</p>\n\n<pre><code>import pyarrow.parquet as pq\ndataset = pq.ParquetDataset('dir')\ntable = dataset.read()\n</code></pre>\n\n<p>This gives <code>out of memory error</code>. </p>\n\n<p>I have also tried using <code>petastorm</code>, but that doesn't work for <code>make_reader()</code> because it isn't of the <code>petastorm</code> type. </p>\n\n<pre><code>with make_batch_reader('dir') as reader:\n  dataset = make_petastorm_dataset(reader)\n</code></pre>\n\n<p>When I used the <code>make_batch_reader()</code> and then the <code>make_petastorm_dataset(reader)</code>, it again gave an <code>zip not iterable error</code> or something along those lines. </p>\n\n<p>I am not sure how to load the file into Python for ML training. \nSome quick help would be greatly appreciated. </p>\n\n<p>Thanks\nZash</p>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "nlp",
+        "data-science",
+        "text-classification"
+      ],
+      "comment_count": 1,
+      "question_id": 67055339,
+      "title": "How to handle repeating text data but with Different Labels or Classes?",
+      "body": "<p>I am doing a Multi-class Text Classification. However, I have data that are repeating in the dataset. However, these are not duplicates, as they belong to different classes. The data is valid, these two classes are close to each other, The repeated text training data is not of the same class, but of diff classes with the same shared URLs. What can I do, so that my Text classifier effectively working at predicting the future inputs with higher probability without sharing probability with the other counterpart? Also are there any other techniques\nTO NOTE: Only 10 % of training data is repeated with diff classes.</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "r",
+        "machine-learning"
+      ],
+      "comment_count": 1,
+      "question_id": 67060819,
+      "title": "Constraining a machine learning feature to only characterize another feature?",
+      "body": "<p>Say I have dataset #1, which has cases distinguishable on one of two potential outcomes A vs B.  Each case has a decent amount of complex, interacting data for 3 features: primary features X &amp; Y, and secondary feature Z.</p>\n<p>We want to train/test a model on dataset #1 that can effectively make classification decisions using X &amp; Y, then apply it to similar dataset #2.  However, the two datasets vary in a key way. In dataset #1, X depends to some degree on concurrent factor Z (also in relatively complex ways).  In dataset #2, however, feature Z is absent (both in the data and as a likely influence on X).</p>\n<p>If we don't account for Z in dataset #1, the concern is that a classifier might make use of X as a proxy for Z, potentially limiting model portability to scenarios where Z's effects are largely absent.  However, fully incorporating Z in model would presumably limit portability at least as much.</p>\n<p>So, what (I believe) we want is a model with &quot;X, controlling for Z&quot;: Z is included somehow to help ensure the XY -&gt; A/B relationship will generalize to more situations, but Z does is not directly used to inform A vs. B predictions.</p>\n<p>What sort of implementation might be the best to accomplish this? Is there a way to include this in one's primary model? Two-stage model training?  More traditional approaches in data prep (e.g., fitting some explicit Z -&gt; X model and taking the residuals)?  Something else?</p>\n<p>Relevant examples in either Python or R (preferred) would also be great.</p>\n"
+    },
+    {
+      "tags": [
+        "machine-learning",
+        "computer-vision",
+        "dataset",
+        "image-classification"
+      ],
+      "comment_count": 1,
+      "question_id": 67046698,
+      "title": "wy for naming images for a classification dataset",
+      "body": "<p>Hi I'm an on the search for a way to create a classification dataset where I need the images to be named after its content like a picture of a handwritten c = c1.jpg another one a big B = B1.jpg. Has anyone a tool tip for me\nthx in advance</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "machine-learning",
+        "deep-learning",
+        "sentiment-analysis",
+        "senti-wordnet"
+      ],
+      "comment_count": 1,
+      "question_id": 67059497,
+      "title": "It is possible to use sentiwordnet with machine learning for sentiment analysis",
+      "body": "<p>i'm new in sentiment analysis and i wanna know if i can use sentiwordnet and machine learning or deep learning in the same time to have a good classifier</p>\n"
+    },
+    {
+      "tags": [
+        "unity3d",
+        "machine-learning",
+        "mobile"
+      ],
+      "comment_count": 1,
+      "question_id": 67059178,
+      "title": "add a recommendation service to a mobile Unity game using machine learning?",
+      "body": "<p>I'm making a mobile game with educational content using Unity. I want to add a recommendation system with machine learning. I can add a hint button to help and/or refer to educational resources about the topic they learn. But I couldn't find and sample or information about adding Tensorflow to unity except character automatization. Can I use Unity ML agents for this project?</p>\n"
+    }
+  ],
+  "has_more": true,
+  "quota_max": 10000,
+  "quota_remaining": 9961
+}
