@@ -1,0 +1,17 @@
+{
+    "items": [
+      {
+        "tags": [
+          "python",
+          "machine-learning",
+          "deep-learning",
+          "neural-network",
+          "pytorch"
+        ],
+        "comment_count": 1,
+        "question_id": 67071168,
+        "title": "In pytorch, how to train a model with two or more outputs?",
+        "body": "<pre><code>output_1, output_2 = model(x)\nloss = cross_entropy_loss(output_1, target_1)\nloss.backward()\noptimizer.step()\n\nloss = cross_entropy_loss(output_2, target_2)\nloss.backward()\noptimizer.step()\n</code></pre>\n<p>However, when I run this piece of code, I got this error:</p>\n<pre><code>RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation: [torch.FloatTensor [1, 4]], which is output 0 of TBackward, is at version 2; expected version 1 instead. Hint: enable anomaly detection to find the operation that failed to compute its gradient, with torch.autograd.set_detect_anomaly(True).\n</code></pre>\n<p>Then, I really wanna know what I am supposed to do to train a model with 2 or more outputs</p>\n"
+      }
+    ]
+  }
